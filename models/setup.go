@@ -20,7 +20,12 @@ func ConnectDataBase() {
 
 	defer db.Close()
 
-	db.AutoMigrate(&Customer{})
+	db.AutoMigrate(
+		&Customer{},
+		&Contact{},
+		&Address{},
+		&Coordinate{},
+	)
 
 	DB = db
 }

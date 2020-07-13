@@ -14,4 +14,5 @@ type Contact struct {
 	Phone3       string `json:"phone3"`
 	Email        string `json:"email"`
 	OtherDetails string `json:"otherDetails"`
+	CustomerID   uint
 }
