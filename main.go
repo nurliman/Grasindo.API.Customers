@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nurlimandiara/Grasindo.API.go/models"
+	"github.com/nurliman/Grasindo.API.go/models"
 
 	"net/http"
 
