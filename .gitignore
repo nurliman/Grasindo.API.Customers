@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/go,linux,dotenv
-# Edit at https://www.toptal.com/developers/gitignore?templates=go,linux,dotenv
+# Created by https://www.toptal.com/developers/gitignore/api/go,linux,dotenv,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=go,linux,dotenv,visualstudiocode
 
 ### dotenv ###
 .env
@@ -41,4 +41,16 @@
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-# End of https://www.toptal.com/developers/gitignore/api/go,linux,dotenv
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.toptal.com/developers/gitignore/api/go,linux,dotenv,visualstudiocode
