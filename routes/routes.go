@@ -26,11 +26,11 @@ func SetupRouter() *gin.Engine {
 		// endpoints "/v1/customers"
 		customers := v1.Group("/customers")
 		{
-			customers.GET("/", controllers.AddCustomer)
-			customers.GET("/:id", controllers.AddCustomer)
+			customers.GET("/", controllers.GetAllCustomers)
+			customers.GET("/:id", controllers.GetACustomer)
 			customers.POST("/", controllers.AddCustomer)
 			customers.PUT("/:id", controllers.AddCustomer)
-			customers.DELETE("/:id", controllers.AddCustomer)
+			customers.DELETE("/:id", controllers.DeleteACustomer)
 		}
 	}
 
