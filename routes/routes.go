@@ -30,7 +30,7 @@ func SetupRouter() *gin.Engine {
 			customers.GET("/:id", controllers.GetACustomer)
 			customers.POST("/", controllers.AddCustomer)
 			customers.PUT("/:id", controllers.AddCustomer)
-			customers.DELETE("/:id", controllers.DeleteACustomer)
+			customers.DELETE("/:id", controllers.DeleteCustomer)
 		}
 	}
 
