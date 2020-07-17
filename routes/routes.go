@@ -23,21 +23,23 @@ func SetupRouter() *gin.Engine {
 			context.JSON(http.StatusOK, gin.H{"api": "grasindo", "version": "1"})
 		})
 
-		// endpoints "/v1/customers"
+		// customers endpoints "/v1/customers"
 		customers := v1.Group("/customers")
 		{
 			customers.GET("/", controllers.GetAllCustomers)
-			customers.GET("/:id", controllers.GetACustomer)
+			customers.GET("/:customerId", controllers.GetCustomer)
 			customers.POST("/", controllers.AddCustomer)
-			customers.PUT("/:id", controllers.EditACustomer)
-			customers.DELETE("/:id", controllers.DeleteCustomer)
-		}
+			customers.PUT("/:customerId", controllers.EditCustomer)
+			customers.DELETE("/:customerId", controllers.DeleteCustomer)
 
-		addresses := v1.Group("/addresses")
-		{
-			addresses.GET("/", func(context *gin.Context) {
-				context.JSON(http.StatusOK, gin.H{"api": "grasindo"})
-			})
+			addresses := customers.Group("/:customerId/addresses")
+			{
+				addresses.GET("/", controllers.GetCustomerAddresses)
+				addresses.GET("/:addressId", controllers.GetCustomerAddress)
+				addresses.POST("/", controllers.AddAddressToCustomer)
+				addresses.PUT("/:addressId", controllers.EditCustomerAddress)
+				addresses.DELETE("/:addressId", controllers.DeleteCustomerAddress)
+			}
 		}
 	}
 

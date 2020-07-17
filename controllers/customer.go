@@ -22,20 +22,20 @@ func AddCustomer(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"data": input})
 }
 
-// EditACustomer update edit customer information, but not updating sub models like Address, Customer
-func EditACustomer(context *gin.Context) {
+// EditCustomer update edit customer information, but not updating sub models like Address, Customer
+func EditCustomer(context *gin.Context) {
 	var customer models.Customer
-	var id = context.Param("id")
+	var customerID = context.Param("customerId")
 
 	if err := config.DB.
 		Preload("Addresses").
 		Preload("Addresses.Coordinate").
 		Preload("Contacts").
-		Where("id = ?", id).
+		Where("id = ?", customerID).
 		First(&customer).
 		Error; err != nil {
 		context.AbortWithStatusJSON(http.StatusNotFound, gin.H{
-			"message": fmt.Sprintf("Cannot find customer with id:%s", id),
+			"message": fmt.Sprintf("Cannot find customer with id:%s", customerID),
 		})
 		return
 	}
@@ -46,7 +46,7 @@ func EditACustomer(context *gin.Context) {
 		return
 	}
 
-	config.DB.Model(&customer).Updates(input)
+	config.DB.Model(&customer).Set("gorm:association_save_reference", false).Update(&input)
 
 	context.JSON(http.StatusOK, gin.H{"data": customer})
 }
@@ -68,20 +68,20 @@ func GetAllCustomers(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"data": customers})
 }
 
-// GetACustomer find customer by id param
-func GetACustomer(context *gin.Context) {
+// GetCustomer find customer by id param
+func GetCustomer(context *gin.Context) {
 	var customer models.Customer
-	var id = context.Param("id")
+	var customerID = context.Param("customerId")
 	var err = config.DB.
 		Preload("Addresses").
 		Preload("Addresses.Coordinate").
 		Preload("Contacts").
-		Where("id = ?", id).
+		Where("id = ?", customerID).
 		First(&customer).Error
 
 	if err != nil {
 		context.AbortWithStatusJSON(http.StatusNotFound, gin.H{
-			"message": fmt.Sprintf("Cannot find customer with id:%s", id),
+			"message": fmt.Sprintf("Cannot find customer with id:%s", customerID),
 		})
 		return
 	}
@@ -92,11 +92,11 @@ func GetACustomer(context *gin.Context) {
 // DeleteCustomer delete customer by id param
 func DeleteCustomer(context *gin.Context) {
 	var customer models.Customer
-	var id = context.Param("id")
+	var customerID = context.Param("customerId")
 
-	if err := config.DB.Where("id = ?", id).First(&customer).Error; err != nil {
+	if err := config.DB.Where("id = ?", customerID).First(&customer).Error; err != nil {
 		context.AbortWithStatusJSON(http.StatusNotFound, gin.H{
-			"message": fmt.Sprintf("Cannot find customer with id:%s", id),
+			"message": fmt.Sprintf("Cannot find customer with id:%s", customerID),
 		})
 		return
 	}
