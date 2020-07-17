@@ -7,9 +7,9 @@ import (
 // Contact containts contact(s) of customer
 type Contact struct {
 	gorm.Model
-	Name         string `json:"name"`
+	Name         string `json:"name" binding:"required"`
 	Title        string `json:"title"`
-	Phone        string `json:"phone"`
+	Phone        string `json:"phone" binding:"required"`
 	Phone2       string `json:"phone2"`
 	Phone3       string `json:"phone3"`
 	Email        string `json:"email"`

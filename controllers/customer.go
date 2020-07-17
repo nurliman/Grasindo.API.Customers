@@ -13,13 +13,42 @@ import (
 // AddCustomer = adding costumer to database
 func AddCustomer(context *gin.Context) {
 	var input models.Customer
-	if err := context.ShouldBindJSON(&input); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	if err := context.BindJSON(&input); err != nil {
+		context.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	config.DB.Create(&input)
 	context.JSON(http.StatusOK, gin.H{"data": input})
+}
+
+// EditACustomer update edit customer information, but not updating sub models like Address, Customer
+func EditACustomer(context *gin.Context) {
+	var customer models.Customer
+	var id = context.Param("id")
+
+	if err := config.DB.
+		Preload("Addresses").
+		Preload("Addresses.Coordinate").
+		Preload("Contacts").
+		Where("id = ?", id).
+		First(&customer).
+		Error; err != nil {
+		context.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"message": fmt.Sprintf("Cannot find customer with id:%s", id),
+		})
+		return
+	}
+
+	var input models.EditCustomerInput
+	if err := context.BindJSON(&input); err != nil {
+		context.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	config.DB.Model(&customer).Updates(input)
+
+	context.JSON(http.StatusOK, gin.H{"data": customer})
 }
 
 // GetAllCustomers  Retrieve all customers
@@ -46,6 +75,7 @@ func GetACustomer(context *gin.Context) {
 	var err = config.DB.
 		Preload("Addresses").
 		Preload("Addresses.Coordinate").
+		Preload("Contacts").
 		Where("id = ?", id).
 		First(&customer).Error
 

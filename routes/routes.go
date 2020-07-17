@@ -29,8 +29,15 @@ func SetupRouter() *gin.Engine {
 			customers.GET("/", controllers.GetAllCustomers)
 			customers.GET("/:id", controllers.GetACustomer)
 			customers.POST("/", controllers.AddCustomer)
-			customers.PUT("/:id", controllers.AddCustomer)
+			customers.PUT("/:id", controllers.EditACustomer)
 			customers.DELETE("/:id", controllers.DeleteCustomer)
+		}
+
+		addresses := v1.Group("/addresses")
+		{
+			addresses.GET("/", func(context *gin.Context) {
+				context.JSON(http.StatusOK, gin.H{"api": "grasindo"})
+			})
 		}
 	}
 

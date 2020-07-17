@@ -7,7 +7,7 @@ import (
 // Address containts address(es) of customer
 type Address struct {
 	gorm.Model
-	Name         string      `json:"name"`
+	Name         string      `json:"name" binding:"required"`
 	AddressLine1 string      `json:"addressLine1"`
 	AddressLine2 string      `json:"addressLine2"`
 	SubDistrict  string      `json:"subDistrict"`
@@ -16,7 +16,7 @@ type Address struct {
 	Province     string      `json:"province"`
 	Country      string      `json:"country"`
 	ZipCode      int         `json:"zipCode"`
-	Coordinate   *Coordinate `json:"coordinate"`
+	Coordinate   *Coordinate `json:"coordinate" binding:"required,dive"`
 	OtherDetails string      `json:"otherDetails"`
 	CustomerID   uint
 }
