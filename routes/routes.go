@@ -40,6 +40,14 @@ func SetupRouter() *gin.Engine {
 				addresses.PUT("/:addressId", controllers.EditCustomerAddress)
 				addresses.DELETE("/:addressId", controllers.DeleteCustomerAddress)
 			}
+
+			contacts := customers.Group("/:customerId/contacts")
+			{
+				contacts.GET("/", controllers.GetCustomerContacts)
+				contacts.GET("/:contactId", controllers.GetCustomerContact)
+				contacts.POST("/", controllers.AddContactToCustomer)
+				contacts.DELETE("/:contactId", controllers.DeleteCustomerContact)
+			}
 		}
 	}
 
