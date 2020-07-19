@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/nurliman/Grasindo.API.go/controllers"
+	"github.com/nurliman/Grasindo.API.Customer/controllers"
 
 	"github.com/gin-gonic/gin"
 )

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/nurliman/Grasindo.API.go/config"
-	"github.com/nurliman/Grasindo.API.go/models"
+	"github.com/nurliman/Grasindo.API.Customer/config"
+	"github.com/nurliman/Grasindo.API.Customer/models"
 
 	"github.com/gin-gonic/gin"
 )
