@@ -8,6 +8,7 @@ import (
 type Contact struct {
 	gorm.Model
 	Name         string `json:"name" binding:"required"`
+	Person       string `json:"person" binding:"required"`
 	Title        string `json:"title"`
 	Phone        string `json:"phone" binding:"required"`
 	Phone2       string `json:"phone2"`
@@ -19,6 +20,7 @@ type Contact struct {
 
 type ContactInput struct {
 	Name         string `json:"name" binding:"required"`
+	Person       string `json:"person" binding:"required"`
 	Title        string `json:"title"`
 	Phone        string `json:"phone" binding:"required"`
 	Phone2       string `json:"phone2"`
