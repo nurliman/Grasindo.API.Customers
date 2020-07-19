@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/nurliman/Grasindo.API.Customer/config"
-	"github.com/nurliman/Grasindo.API.Customer/models"
+	"github.com/nurliman/Grasindo.API.Customers/config"
+	"github.com/nurliman/Grasindo.API.Customers/models"
 
 	"github.com/gin-gonic/gin"
 )

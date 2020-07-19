@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/nurliman/Grasindo.API.Customer/config"
-	"github.com/nurliman/Grasindo.API.Customer/models"
-	"github.com/nurliman/Grasindo.API.Customer/routes"
+	"github.com/nurliman/Grasindo.API.Customers/config"
+	"github.com/nurliman/Grasindo.API.Customers/models"
+	"github.com/nurliman/Grasindo.API.Customers/routes"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"

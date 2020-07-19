@@ -1,4 +1,4 @@
-module github.com/nurliman/Grasindo.API.Customer
+module github.com/nurliman/Grasindo.API.Customers
 
 go 1.14
 
