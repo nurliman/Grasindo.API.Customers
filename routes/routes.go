@@ -46,6 +46,7 @@ func SetupRouter() *gin.Engine {
 				contacts.GET("/", controllers.GetCustomerContacts)
 				contacts.GET("/:contactId", controllers.GetCustomerContact)
 				contacts.POST("/", controllers.AddContactToCustomer)
+				contacts.PUT("/:contactId", controllers.EditCustomerContact)
 				contacts.DELETE("/:contactId", controllers.DeleteCustomerContact)
 			}
 		}
